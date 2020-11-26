@@ -38,10 +38,14 @@ class DataGenerator:
     def generate_payload(self, device: Device):
         try:
             dt = { 'timestamp': str(datetime.now()) }
-            humid = { 'humid' : '{:3.2f}'.format(self._fake.pyfloat(left_digits=2, right_digits=2, min_value=40, max_value=70, positive=True) / 100) }
-            temp = { 'temp': '{:4.2f}'.format(self._fake.pyfloat(left_digits=2, right_digits=2, min_value=19, max_value=27, positive=True)) }
-            json_payload = [dt, humid, temp, device.device_id, device.device_ip, device.device_location]
-            json_dump = json.JSONEncoder().encode(json.dumps(json_payload))
+            humid = { 'humidity' : '{:3.2f}'.format(self._fake.pyfloat(left_digits=2, right_digits=2, min_value=40, max_value=70, positive=True) / 100) }
+            temp = { 'temperature': '{:4.2f}'.format(self._fake.pyfloat(left_digits=2, right_digits=2, min_value=19, max_value=27, positive=True)) }
+            device_id = {'device_id': device.device_id }
+            device_ip = {'device_ip': device.device_ip }
+            device_location = {'device_location': device.device_location}
+            json_payload = [dt, humid, temp, device_id, device_ip, device_location]
+            # json_dump = json.JSONEncoder().encode(json.dumps(json_payload))
+            json_dump = json.dumps(json_payload)
             return json_dump
         except Exception as e:
             print(str(e))
