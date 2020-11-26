@@ -13,7 +13,7 @@ class Device:
         self._device_id = fake.uuid4()
         self._device_ip_address = fake.ipv4_private()
         self._device_status = fake.pybool()
-        self._device_location = json.dumps(fake.location_on_land())
+        self._device_location = json.dumps(fake.local_latlng(country_code='CA'))
 
     @property
     def device_id(self):
