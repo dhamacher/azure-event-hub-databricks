@@ -30,6 +30,7 @@ async def run(number_of_devices, interval, max_events):
     except Exception as e:
         print(str(e))
 
+
 def test_run(number_of_devices, interval, max_events):
     try:
         # Create a producer client to send messages to the event hub.
@@ -47,4 +48,3 @@ def test_run(number_of_devices, interval, max_events):
         print('All batches complete!')
     except Exception as e:
         print(str(e))
-
