@@ -1,9 +1,12 @@
 import os
 from time import sleep
+from faker import Faker
+from faker.providers import python
 from src.data_generator.generator import DataGenerator
 from azure.eventhub import EventHubProducerClient
 from azure.eventhub import EventData
 
+Faker.seed(0)
 
 def create_batch(client, generator: DataGenerator):
     try:
