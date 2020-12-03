@@ -8,6 +8,8 @@ Faker.seed(0)
 
 
 class DataGenerator:
+    """ Class the defines the data generator to create random messages for IoT experiment. """
+
     def __init__(self, num_of_devices: int, interval_in_sec: int):
         try:
             self._fake = Faker()
@@ -21,6 +23,7 @@ class DataGenerator:
             print(str(e))
 
     def set_devices_status(self, status: bool):
+        """ Set the status for all devices. """
         try:
             for d in self._devices:
                 d.device_status = status
@@ -28,14 +31,17 @@ class DataGenerator:
             print(str(e))
 
     def display_devices(self):
+        """ Print the devices used by the generator. """
         for d in self._devices:
             print(d.to_string)
 
     @property
     def devices(self) -> list:
+        """ Return device collection used by the generator. """
         return self._devices
 
     def generate_payload(self, device: Device):
+        """ Returns a message as JSON that is send to a message broker. """
         try:
             payload_dict = {
                 'timestamp': str(datetime.now()),

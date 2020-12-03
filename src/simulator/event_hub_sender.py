@@ -6,9 +6,22 @@ from src.data_generator.generator import DataGenerator
 from azure.eventhub import EventHubProducerClient
 from azure.eventhub import EventData
 
+# Set Faker seed.
 Faker.seed(0)
 
+
 def create_batch(client, generator: DataGenerator):
+    """ Returns an Azure Event Hub batch with generated messages.
+
+    Parameters:
+         client: Azure Event Hub client
+         generator: The gernerator objects that contains the devices and definition to create messages send to the
+         Event Hub
+
+    Returns:
+        event_data_batch: Azure Event Hub batch object
+
+    """
     try:
         event_data_batch = client.create_batch()
         for device in generator.devices:
@@ -20,6 +33,15 @@ def create_batch(client, generator: DataGenerator):
 
 
 async def run(number_of_devices, interval, max_events):
+    """ Run the simulator i.e. create the data generator, connect to the Azure Event Hub, create a batch, and
+    send the batch to the Event Hub
+
+    Parameters:
+        number_of_devices: The number of devices to create.
+        interval: The interval in seconds to send messages to the Azure Event Hub.
+        max_events:
+
+    """
     try:
         # Create a producer client to send messages to the event hub.
         # Specify a connection string to your event hubs namespace and
